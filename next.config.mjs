@@ -1,30 +1,23 @@
-import { remarkCodeHike, recmaCodeHike } from "codehike/mdx"
-import createMDX from '@next/mdx'
-
-/** @type {import('codehike/mdx').CodeHikeConfig} */
-const chConfig = {
-  components: { code: "Code" },
-}
-
-const mdxOptions = {
-  remarkPlugins: [[remarkCodeHike, chConfig]],
-  recmaPlugins: [[recmaCodeHike, chConfig]],
-  jsx: true,
-}
+// next.config.mjs
+import { remarkCodeHike, recmaCodeHike } from 'codehike/mdx';
+import createMDX from '@next/mdx';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/my-docs',
-  trailingSlash: true,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'], // Добавьте эту строку
-}
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+};
 
-// Создаём конфигурацию MDX с нашими опциями
+/** @type {import('codehike/mdx').CodeHikeConfig} */
+const chConfig = {
+  components: { code: 'Code' },
+};
+
 const withMDX = createMDX({
-  extension: /\.(md|mdx)$/,
-  options: mdxOptions,
-})
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [[remarkCodeHike, chConfig]],
+    recmaPlugins: [[recmaCodeHike, chConfig]],
+  },
+});
 
-// Объединяем конфигурацию Next.js с MDX
-export default withMDX(nextConfig)
+export default withMDX(nextConfig);
