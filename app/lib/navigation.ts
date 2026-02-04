@@ -4,6 +4,7 @@ import {
   Flag,
   Stone,
   Pickaxe,
+  Info,
   LucideIcon // Импортируем тип для TypeScript
 } from 'lucide-react';
 
@@ -24,6 +25,11 @@ export const navigation: NavItem[] = [
     title: 'Первые шаги',
     href: '/pages/first-steps',
     icon: Flag, // <-- Теперь это работает сразу
+  },
+  {
+    title: 'ЧаВо',
+    href: '/pages/faq',
+    icon: Info, // <-- Теперь это работает сразу
   },
   {
     title: 'Ресурсы',
