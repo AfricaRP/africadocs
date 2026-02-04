@@ -14,17 +14,15 @@ const mdxOptions = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Критически важно для GitHub Pages:
   output: 'export',
-  // Базовая настройка для кастомного домена (можно оставить пустым):
   basePath: '/my-docs',
-  // Для корректной работы навигации со статическим экспортом:
   trailingSlash: true,
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'], // Добавьте эту строку
 }
 
 // Создаём конфигурацию MDX с нашими опциями
 const withMDX = createMDX({
-  extension: /\.mdx$/,
+  extension: /\.(md|mdx)$/,
   options: mdxOptions,
 })
 
