@@ -40,79 +40,8 @@ const navigation: NavItem[] = [
     title: 'Начало работы',
     icon: <BookOpen className="w-4 h-4" />,
     children: [
-      { title: 'Введение', href: '/docs/intro' },
-      { title: 'Установка', href: '/docs/installation' },
-      { title: 'Быстрый старт', href: '/docs/quickstart' },
-    ],
-  },
-  {
-    title: 'Игровые системы',
-    icon: <Gamepad2 className="w-4 h-4" />,
-    children: [
-      { title: 'Персонаж', href: '/docs/character' },
-      { title: 'Инвентарь', href: '/docs/inventory' },
-      { title: 'Крафтинг', href: '/docs/crafting' },
-    ],
-  },
-  {
-    title: 'Экономика',
-    icon: <Coins className="w-4 h-4" />,
-    children: [
-      { title: 'Банковская система', href: '/docs/banking' },
-      { title: 'Работы', href: '/docs/jobs' },
-      { title: 'Бизнесы', href: '/docs/business' },
-    ],
-  },
-  {
-    title: 'Транспорт',
-    icon: <Car className="w-4 h-4" />,
-    children: [
-      { title: 'Автомобили', href: '/docs/vehicles' },
-      { title: 'Гараж', href: '/docs/garage' },
-      { title: 'Тюнинг', href: '/docs/tuning' },
-    ],
-  },
-  {
-    title: 'Фракции',
-    icon: <Shield className="w-4 h-4" />,
-    children: [
-      { title: 'Полиция', href: '/docs/police' },
-      { title: 'Медики', href: '/docs/medics' },
-      { title: 'Банды', href: '/docs/gangs' },
-    ],
-  },
-  {
-    title: 'Недвижимость',
-    icon: <Building2 className="w-4 h-4" />,
-    children: [
-      { title: 'Дома', href: '/docs/houses' },
-      { title: 'Квартиры', href: '/docs/apartments' },
-    ],
-  },
-  {
-    title: 'API Reference',
-    icon: <Code className="w-4 h-4" />,
-    children: [
-      { title: 'Серверные события', href: '/docs/api/server-events' },
-      { title: 'Клиентские события', href: '/docs/api/client-events' },
-      { title: 'Экспорты', href: '/docs/api/exports' },
-    ],
-  },
-  {
-    title: 'Для разработчиков',
-    icon: <FileText className="w-4 h-4" />,
-    children: [
-      { title: 'Гайдлайны', href: '/docs/dev/guidelines' },
-      { title: 'Структура проекта', href: '/docs/dev/structure' },
-      { title: 'Контрибьютинг', href: '/docs/dev/contributing' },
-    ],
-  },
-  {
-    title: 'Настройки',
-    icon: <Settings className="w-4 h-4" />,
-    children: [
-      { title: 'Конфигурация', href: '/docs/config' },
-      { title: 'Права доступа', href: '/docs/permissions' },
+      { title: 'Введение', href: '/guides/guide-1' },
+      { title: 'Установка', href: '/guides/guide-2' },
     ],
   },
 ];

@@ -1,22 +1,22 @@
 // next.config.mjs
-import { remarkCodeHike, recmaCodeHike } from 'codehike/mdx';
 import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-};
-
-/** @type {import('codehike/mdx').CodeHikeConfig} */
-const chConfig = {
-  components: { code: 'Code' },
 };
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [[remarkCodeHike, chConfig]],
-    recmaPlugins: [[recmaCodeHike, chConfig]],
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [],
   },
 });
 
