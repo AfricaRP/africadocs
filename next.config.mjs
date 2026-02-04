@@ -1,8 +1,8 @@
 import { remarkCodeHike, recmaCodeHike } from "codehike/mdx"
+import createMDX from '@next/mdx'
 
 /** @type {import('codehike/mdx').CodeHikeConfig} */
 const chConfig = {
-  // Настройки Code Hike (оставьте как есть или измените позже)
   components: { code: "Code" },
 }
 
@@ -14,20 +14,19 @@ const mdxOptions = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Эта опция КРИТИЧЕСКА важна для GitHub Pages!
+  // Критически важно для GitHub Pages:
   output: 'export',
-  // Базовый путь для кастомного домена
+  // Базовая настройка для кастомного домена (можно оставить пустым):
   basePath: '',
-  // Опция для правильной работы навигации
+  // Для корректной работы навигации со статическим экспортом:
   trailingSlash: true,
 }
 
-// Добавляем MDX настройки в конфиг Next.js
-nextConfig.pageExtensions = ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
-if (nextConfig.experimental?.mdxRs) {
-  nextConfig.experimental.mdxRs.options = mdxOptions
-} else {
-  nextConfig.experimental = { ...nextConfig.experimental, mdxRs: { options: mdxOptions } }
-}
+// Создаём конфигурацию MDX с нашими опциями
+const withMDX = createMDX({
+  extension: /\.mdx$/,
+  options: mdxOptions,
+})
 
-export default nextConfig
+// Объединяем конфигурацию Next.js с MDX
+export default withMDX(nextConfig)
