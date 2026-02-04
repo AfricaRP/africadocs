@@ -7,6 +7,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Документация Africa RP',
   description: 'Официальная документация проекта',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
