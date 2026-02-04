@@ -17,7 +17,7 @@ const nextConfig = {
   // Критически важно для GitHub Pages:
   output: 'export',
   // Базовая настройка для кастомного домена (можно оставить пустым):
-  basePath: '',
+  basePath: '/my-docs',
   // Для корректной работы навигации со статическим экспортом:
   trailingSlash: true,
 }
