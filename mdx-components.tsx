@@ -1,12 +1,8 @@
 // mdx-components.tsx
 import type { MDXComponents } from 'mdx/types';
 import { 
-  Info, 
-  Lightbulb, 
-  AlertTriangle, 
-  AlertOctagon, 
-  FileText,
-  CheckCircle
+  Info, Lightbulb, AlertTriangle, AlertOctagon, FileText, CheckCircle,
+  ArrowRight, Flame, Clock
 } from 'lucide-react';
 import { Expandable } from './app/components/Expandable';
 import { Copy } from './app/components/Copy';
