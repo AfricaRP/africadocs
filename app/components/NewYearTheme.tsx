@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 
-const NEW_YEAR_ENABLED = true;
+const NEW_YEAR_ENABLED = false;
 const SNOWFLAKE_COUNT = 50;
 
 interface Snowflake {
