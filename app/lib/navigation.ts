@@ -58,7 +58,7 @@ export const navigation: NavItem[] = [
     icon: Pickaxe,
     children: [
       { title: 'Киянка', href: '/pages/tools/mallet' },
-      { title: 'Фляга', href: '/pages/tools/flaskg' },
+      { title: 'Фляга', href: '/pages/tools/flask' },
     ],
   },
 ];
