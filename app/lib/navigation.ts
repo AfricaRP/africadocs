@@ -1,6 +1,6 @@
 import {  
   Home,
-  Flag,
+  Footprints,
   Stone,
   Pickaxe,
   Info,
@@ -31,7 +31,7 @@ export const navigation: NavItem[] = [
   {
     title: 'Первые шаги',
     href: '/pages/first-steps',
-    icon: Flag,
+    icon: Footprints,
   },
   {
     title: 'ЧаВо',
