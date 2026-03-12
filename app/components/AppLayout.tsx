@@ -87,8 +87,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-800 py-6">
-        <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-          © 2026 Africa RP. Все права защищены.
+        <div className="container mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
+            <Link href="https://legal.africa-rp.su/#doc-terms" className="hover:underline">Пользовательское соглашение</Link>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <Link href="https://legal.africa-rp.su/#doc-privacy" className="hover:underline">Политика конфиденциальности</Link>
+          </div>
+          <div>© 2026 Africa RP. Все права защищены.</div>
+          <a href="mailto:support@africa-rp.su" className="hover:underline">support@africa-rp.su</a>
         </div>
       </footer>
 
