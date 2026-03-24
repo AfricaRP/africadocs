@@ -3,16 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-// Оставляем только технические иконки для UI самого сайдбара
-import { 
-  ChevronDown, 
-  Menu,
-  X,
-  Users
-} from 'lucide-react';
+import { ChevronDown, Menu, X, Users } from 'lucide-react';
 import { navigation, NavItem } from '../lib/navigation';
-
-// --- ВСЮ БОЛЬШУЮ ТАБЛИЦУ const icons УДАЛЯЕМ ---
 
 function normalizePath(path: string): string {
   if (path === '/') return path;
@@ -24,33 +16,19 @@ function isLinkActive(href: string | undefined, pathname: string): boolean {
   return normalizePath(href) === normalizePath(pathname);
 }
 
-function hasActiveChild(children: NavItem[] | undefined, pathname: string): boolean {
-  if (!children) return false;
-  return children.some(child => isLinkActive(child.href, pathname));
+// Рекурсивная проверка активности любого потомка (включая самого себя)
+function isAnyChildActive(item: NavItem, pathname: string): boolean {
+  if (item.href && isLinkActive(item.href, pathname)) return true;
+  if (item.children) {
+    return item.children.some(child => isAnyChildActive(child, pathname));
+  }
+  return false;
 }
 
-function ChildLink({ item, pathname }: { item: NavItem; pathname: string }) {
+// Компонент для обычной ссылки (без детей)
+function LinkItem({ item, pathname }: { item: NavItem; pathname: string }) {
   const isActive = isLinkActive(item.href, pathname);
-  
-  return (
-    <Link
-      href={item.href || '/'}
-      className={`block px-3 py-2 text-sm rounded-lg transition-colors ${
-        isActive 
-          ? 'bg-blue-500 text-white font-semibold' 
-          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
-      }`}
-    >
-      {item.title}
-    </Link>
-  );
-}
-
-function ParentLink({ item, pathname }: { item: NavItem; pathname: string }) {
-  const isActive = isLinkActive(item.href, pathname);
-  // Берем компонент иконки напрямую из item
   const Icon = item.icon;
-  
   return (
     <Link
       href={item.href || '/'}
@@ -60,17 +38,22 @@ function ParentLink({ item, pathname }: { item: NavItem; pathname: string }) {
           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
       }`}
     >
-      {/* Рендерим компонент, если он есть */}
       {Icon && <Icon className="w-4 h-4" />}
       <span>{item.title}</span>
     </Link>
   );
 }
 
-function NavGroup({ item, pathname }: { item: NavItem; pathname: string }) {
-  const hasActive = hasActiveChild(item.children, pathname);
+// Рекурсивный компонент для любого элемента навигации
+function NavItemRenderer({ item, pathname }: { item: NavItem; pathname: string }) {
+  const hasChildren = item.children && item.children.length > 0;
+
+  if (!hasChildren) {
+    return <LinkItem item={item} pathname={pathname} />;
+  }
+
+  const hasActive = isAnyChildActive(item, pathname);
   const [isOpen, setIsOpen] = useState(hasActive);
-  // Берем компонент иконки
   const Icon = item.icon;
 
   useEffect(() => {
@@ -95,11 +78,11 @@ function NavGroup({ item, pathname }: { item: NavItem; pathname: string }) {
         </span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
-      
+
       {isOpen && item.children && (
         <div className="ml-4 mt-1 pl-3 space-y-1 border-l-2 border-gray-200 dark:border-gray-700">
           {item.children.map((child, idx) => (
-            <ChildLink key={idx} item={child} pathname={pathname} />
+            <NavItemRenderer key={idx} item={child} pathname={pathname} />
           ))}
         </div>
       )}
@@ -117,14 +100,10 @@ export function Sidebar() {
 
   const renderNavigation = () => (
     <div className="space-y-1">
-      {navigation.map((item, idx) => 
-        item.children ? (
-          <NavGroup key={idx} item={item} pathname={pathname} />
-        ) : (
-          <ParentLink key={idx} item={item} pathname={pathname} />
-        )
-      )}
-      
+      {navigation.map((item, idx) => (
+        <NavItemRenderer key={idx} item={item} pathname={pathname} />
+      ))}
+
       <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2 px-3 text-xs text-gray-500 dark:text-gray-400">
           <Users className="w-4 h-4" />

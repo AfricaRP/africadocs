@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Expandable } from './app/components/Expandable';
 import { Copy } from './app/components/Copy';
+import { CraftingTable } from './app/components/CraftingTable';
 
 // ==================== TOOLTIP ====================
 
@@ -374,6 +375,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Copy,
     Steps,
     Step,
+    CraftingTable,
     ...components,
   };
 }

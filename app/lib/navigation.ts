@@ -74,30 +74,28 @@ export const navigation: NavItem[] = [
   },
 ];
 
-// Функция поиска остается без изменений, так как она не использует иконки
 export function findCategoryByPath(pathname: string): string | null {
-  // ... ваш старый код функции ...
   const normalizedPathname = pathname.endsWith('/') && pathname !== '/' 
     ? pathname.slice(0, -1) 
     : pathname;
 
-  for (const item of navigation) {
-    if (item.href) {
-      const normalizedHref = item.href.endsWith('/') && item.href !== '/'
-        ? item.href.slice(0, -1)
-        : item.href;
-      if (normalizedHref === normalizedPathname) return item.title;
-    }
-    if (item.children) {
-      for (const child of item.children) {
-        if (child.href) {
-          const normalizedHref = child.href.endsWith('/') && child.href !== '/'
-            ? child.href.slice(0, -1)
-            : child.href;
-          if (normalizedHref === normalizedPathname) return item.title;
+  function search(items: NavItem[], parentTitle?: string): string | null {
+    for (const item of items) {
+      if (item.href) {
+        const normalizedHref = item.href.endsWith('/') && item.href !== '/'
+          ? item.href.slice(0, -1)
+          : item.href;
+        if (normalizedHref === normalizedPathname) {
+          return parentTitle ?? item.title;
         }
       }
+      if (item.children) {
+        const result = search(item.children, item.title);
+        if (result) return result;
+      }
     }
+    return null;
   }
-  return null;
+
+  return search(navigation);
 }
