@@ -13,7 +13,7 @@ interface ServerStatus {
 }
 
 const SERVER_IP = 'play.africa-rp.su';
-const SERVER_PORT = 25516;
+const SERVER_PORT = 25565;
 
 export function MinecraftStatus() {
   const [status, setStatus] = useState<ServerStatus | null>(null);
